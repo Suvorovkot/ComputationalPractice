@@ -39,18 +39,16 @@ deg = 7
 def sortByResidual(n):
     return abs(x - n)
 nods.sort(key=sortByResidual)
-divRes = []; Newton = []
-for i in range(0, deg):
-    divRes.append(f(nods[i]))
-Newton.append(divRes[0])
-b = 0; e = 0
-for i in range(0, deg):
-    e += deg - i
-    for j in range(b, e + 1):
-        divRes.append(dividedResidue(divRes[j+1], divRes[j], nods[j+1], nods[j]))
-    Newton.append(divRes[b])
-    b = e + 1
-print(Newton)
+Newton = []
+#print(nods)
+
+
+def dividedResidue(args):
+    if len(args) == 1:
+        return f(args[0])
+    else:
+        return (dividedResidue(args[1:]) - dividedResidue(args[0:-1])) / (args[-1] - args[0])
+print(dividedResidue(nods))
 
 
 
