@@ -42,14 +42,14 @@ nods.sort(key=sortByResidual)
 Newton = []
 #print(nods)
 
-
 def dividedResidue(args):
     if len(args) == 1:
         return f(args[0])
     else:
         return (dividedResidue(args[1:]) - dividedResidue(args[0:-1])) / (args[-1] - args[0])
-print(dividedResidue(nods))
 
-
+for i in range(1, deg+1):
+    Newton.append(dividedResidue(nods[:i]))
+print(Newton[:i])
 
 
