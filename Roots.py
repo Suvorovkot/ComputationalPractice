@@ -1,4 +1,4 @@
-import math
+import cmath
 
 print('\n',"Numerical methods for finding roots of nonlinear algebraic and transcendental equations",'\n')
 
