@@ -1,7 +1,5 @@
 #import math
 import np
-#import Roots
-#import Interpolating
 import warnings
 from prettytable import PrettyTable
 
@@ -126,10 +124,10 @@ while(x2 <= b):
         ints.append((x1,x2))
     x1 = x2
     x2 += h
-#print('\n',"Number of intervals:", k)
+print('\n',"Number of intervals:", k)
 #for i in range(0, k):
 #    print('[',ints[i][0],',',ints[i][1],']')
-#print('\n')
+print('\n')
 
 #Bisection
 #print("----------------------",'\n',"Bisection method")
@@ -152,7 +150,7 @@ print("--------------")
 print("Finding derrivatives")
 h = (b - a) / m
 
-#Creating derrrivative table
+#Creating derrrivatives table
 Init = PrettyTable()
 Init.field_names = ["i", "Xi", "f(Xi)", "f'_a(Xi)", "|f'(Xi)-f'_a(Xi)|", "f''_a(Xi)", "|f''(Xi)-f''_a(Xi)|"]
 Init.add_row([0, nods[0], f(nods[0]), approxDer2(nods[0], h), abs(derf(nods[0])-approxDer2(nods[0], h)), approxDer4(nods[0], h), abs(secDerf(nods[0])-approxDer4(nods[0], h))])
