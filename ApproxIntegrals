@@ -42,22 +42,15 @@ def midRect(a, m, h):
 		result += f(a + 0.5 * h + i * h)
 	return result * h
 
-"""
+
 print('\n', "Please, enter [a,b]", '\n')
 seg = input().split(",")
 a = float(seg[0])
 b = float(seg[1])
-"""
 
-a = 1.0
-b = 3.0
-m = 50
+print('\n', "Please, enter m", '\n')
+m = int(input())
 h = (b - a) / m
-
-print('\n', "Please, enter w(x)", '\n', "(Please use np prefix: np.exp, np.sin, np.cos and etc)", '\n')
-wstr = input()
-def w():
-    return float(eval(wstr))
 
 print('\n', "Please, enter f(x)", '\n', "(Please use np prefix: np.exp, np.sin, np.cos and etc)", '\n')
 fstr = input()
@@ -65,7 +58,6 @@ def f(x):
     return float(eval(fstr))
 
 J = integrate.quad(lambda x: eval(fstr), a, b)
-
 
 print("--------------")
 print('\n', "J = ", J[0], '\n')

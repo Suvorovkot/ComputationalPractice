@@ -10,7 +10,7 @@ print('\n', "Inverse interpolation. Finding the derivatives of a table-defined f
 def f(x):
     return np.exp(-x) - x**2/2
 def derf(x):
-    return -np.exp(-x) - x
+    return - np.exp(-x) - x
 def secDerf(x):
     return np.exp(-x) - 1
 
@@ -124,7 +124,7 @@ while(x2 <= b):
         ints.append((x1,x2))
     x1 = x2
     x2 += h
-print('\n',"Number of intervals:", k)
+#print('\n',"Number of intervals:", k)
 #for i in range(0, k):
 #    print('[',ints[i][0],',',ints[i][1],']')
 print('\n')
@@ -148,13 +148,18 @@ print("--------------", '\n')
 
 print("--------------")
 print("Finding derrivatives")
-h = (b - a) / m
+print('\n', "Please, enter number of steps", '\n')
+s = int(input())
+h = (b - a) / s
 
 #Creating derrrivatives table
 Init = PrettyTable()
 Init.field_names = ["i", "Xi", "f(Xi)", "f'_a(Xi)", "|f'(Xi)-f'_a(Xi)|", "f''_a(Xi)", "|f''(Xi)-f''_a(Xi)|"]
-Init.add_row([0, nods[0], f(nods[0]), approxDer2(nods[0], h), abs(derf(nods[0])-approxDer2(nods[0], h)), approxDer4(nods[0], h), abs(secDerf(nods[0])-approxDer4(nods[0], h))])
+Init.add_row([0, nods[0], f(nods[0]), approxDer2(nods[0], h), abs(derf(nods[0])-approxDer2(nods[0], h)),
+              approxDer4(nods[0], h), abs(secDerf(nods[0])-approxDer4(nods[0], h))])
 for i in range(1, m):
-    Init.add_row([i, nods[i], f(nods[i]), approxDer1(nods[i], h), abs(derf(nods[0])-approxDer2(nods[i], h)), approxDer4(nods[i], h), abs(secDerf(nods[i])-approxDer4(nods[i], h))])
-Init.add_row([m, nods[m], f(nods[m]), approxDer3(nods[m], h), abs(derf(nods[m])-approxDer3(nods[m], h)), approxDer4(nods[m], h), abs(secDerf(nods[m])-approxDer4(nods[m], h))])
+    Init.add_row([i, nods[i], f(nods[i]), approxDer1(nods[i], h), abs(derf(nods[i])-approxDer2(nods[i], h)),
+                  approxDer4(nods[i], h), abs(secDerf(nods[i])-approxDer4(nods[i], h))])
+Init.add_row([m, nods[m], f(nods[m]), approxDer3(nods[m], h), abs(derf(nods[m])-approxDer3(nods[m], h)),
+              approxDer4(nods[m], h), abs(secDerf(nods[m])-approxDer4(nods[m], h))])
 print(Init, '\n')
