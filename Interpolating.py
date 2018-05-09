@@ -78,7 +78,7 @@ P = polNewton(coefNewton, x, nods[:deg])
 print("--------------")
 print("Newton's: Pn(x) = ", P)
 print("|f(x) - Pn(x)| = ", np.fabs(f(x)-P))
-print("--------------",'\n')
+print("--------------", '\n')
 
 #Lagrange interpolation
 
@@ -89,4 +89,4 @@ for nd in nods[:deg]:
 print("--------------")
 print("Lagrange's: Pn(x) = ", polLagrange(deg, x, nods, fnods))
 print("|f(x) - Pn(x)| = ", np.fabs(f(x)-P))
-print("--------------",'\n')
+print("--------------", '\n')

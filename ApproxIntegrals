@@ -30,10 +30,10 @@ def leftRect(a, m, h):
 		result += f(a + i * h)
 	return result * h
 
-def rightRect(a, b, m, h):
-	result = f(a + 0.5 * h)
-	for i in range(1, m):
-		result += f(b  + i * h)
+def rightRect(a, m, h):
+	result = f(a + h)
+	for i in range(2, m):
+		result += f(a  + i * h)
 	return result * h
 
 def midRect(a, m, h):
@@ -66,7 +66,7 @@ print("Left rectangular formula")
 print('\n', "J(h) = ", leftRect(a, m, h), '\n', "|J(h) - J| = ", abs(leftRect(a, m, h) - J[0]), '\n')
 print("--------------")
 print("Right rectangular formula")
-print('\n', "J(h) = ", rightRect(a, b, m, h), '\n', "|J(h) - J| = ", abs(rightRect(a, b, m, h) - J[0]), '\n')
+print('\n', "J(h) = ", rightRect(a, m, h), '\n', "|J(h) - J| = ", abs(rightRect(a, m, h) - J[0]), '\n')
 print("--------------")
 print("Middle rectangular formula")
 print('\n', "J(h) = ", midRect(a, m, h), '\n', "|J(h) - J| = ", abs(midRect(a, m, h) - J[0]), '\n')

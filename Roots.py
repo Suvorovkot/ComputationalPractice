@@ -38,12 +38,12 @@ for i in range(0,k):
     x = (a + b) / 2
     print("For x", i, ' initial approximation is: ', x, sep="")
     count = 1
-    while math.fabs(f(x)) >= e:
+    while abs(f(x)) >= e:
         a, b = (a, x) if f(a) * f(x) < 0 else (x, b)
         x = (a + b) / 2
         count += 1
     print("x",i,' = ',x, sep="")
-    print("|f(x", i, ')-0| = ', (math.fabs(f(x))),'\n', sep="")
+    print("|f(x", i, ')-0| = ', (abs(f(x))),'\n', sep="")
     print('\n',"With",count,"iterations.",'\n')
 
 #Newton
