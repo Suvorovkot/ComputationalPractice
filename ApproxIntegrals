@@ -4,7 +4,7 @@ import warnings
 from prettytable import PrettyTable
 warnings.simplefilter('ignore', np.RankWarning)
 
-print('\n', "Integration with quadrature formulas", '\n')
+print('\n', "Integration with quadrature formulas (assuming w(x) = 1)", '\n')
 def simpson(a, b, m, h):
     k = 0.0
     x = a + h
@@ -25,20 +25,20 @@ def trapez(a, b, m, h):
 	return result * h
 
 def leftRect(a, m, h):
-	result = f(a + 0.5 * h)
-	for i in range(1, m):
+	result = 0
+	for i in range(0, m):
 		result += f(a + i * h)
 	return result * h
 
 def rightRect(a, m, h):
-	result = f(a + h)
-	for i in range(2, m):
+	result = 0
+	for i in range(1, m + 1):
 		result += f(a  + i * h)
 	return result * h
 
 def midRect(a, m, h):
-	result = f(a + 0.5 * h)
-	for i in range(1, m):
+	result = 0
+	for i in range(0, m):
 		result += f(a + 0.5 * h + i * h)
 	return result * h
 
