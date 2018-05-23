@@ -1,4 +1,4 @@
-import cmath
+import np
 
 print('\n',"Numerical methods for finding roots of nonlinear algebraic and transcendental equations",'\n')
 
@@ -54,12 +54,12 @@ for i in range(0,k):
     print("For x", i, ' initial approximation is: ', x0, sep="")
     x1 = x0 - (f(x0) / fp(x0))
     count = 1
-    while (math.fabs(x1 - x0) >= e):
+    while (abs(x1 - x0) >= e):
         x0 = x1
         x1 = x0 - (f(x0) / fp(x0))
         count += 1
     print("x",i,' = ',x1, sep="")
-    print("|f(x", i, ')-0| = ', round(math.fabs(f(x1)),ans),'\n', sep="")
+    print("|f(x", i, ')-0| = ', round(abs(f(x1)),ans),'\n', sep="")
     print('\n',"With",count,"iterations.",'\n')
 
 #Modified Newton
@@ -71,12 +71,12 @@ for i in range(0,k):
     fp0 = fp(x0)
     x1 = x0 - (f(x0) / fp0)
     count = 1
-    while (math.fabs(x1 - x0) >= e):
+    while (abs(x1 - x0) >= e):
         x0 = x1
         x1 = x0 - (f(x0) / fp0)
         count += 1
     print("x",i,' = ',x1, sep="")
-    print("|f(x", i, ')-0| = ', round(math.fabs(f(x1)),ans),'\n', sep="")
+    print("|f(x", i, ')-0| = ', round(abs(f(x1)),ans),'\n', sep="")
     print('\n',"With",count,"iterations.",'\n')
 
 #Secant
@@ -87,12 +87,12 @@ for i in range(0,k):
     x = x0 - f(x0) * (x1 - x0) / (f(x1) - f(x0))
     print("For x", i, ' initial approximation is: ', x, sep="")
     count = 1
-    while (math.fabs(x - x1) >= e):
+    while (abs(x - x1) >= e):
         x0 = x1; x1 = x
         x = x0 - f(x0) * (x1 - x0) / (f(x1) - f(x0))
         count += 1
     print("x", i, ' = ', x, sep="")
-    print("|f(x", i, ')-0| = ', round(math.fabs(f(x)),ans),'\n', sep="")
+    print("|f(x", i, ')-0| = ', round(abs(f(x)),ans),'\n', sep="")
     print('\n',"With",count,"iterations.",'\n')
 
 #Iteration
@@ -103,10 +103,10 @@ for i in range(0,k):
     x = x1 - lam * f(x1)
     print("For x", i, ' initial approximation is: ', x, sep="")
     count = 1
-    while (math.fabs(x - x1) >= e):
+    while (abs(x - x1) >= e):
         x0 = x1; x1 = x
         x = x1 - lam * f(x1)
         count += 1
     print("x", i, ' = ', x, sep="")
-    print("|f(x", i, ')-0| = ', round(math.fabs(f(x)),ans),'\n', sep="")
+    print("|f(x", i, ')-0| = ', round(abs(f(x)),ans),'\n', sep="")
     print("With",count,"iterations.",'\n')
