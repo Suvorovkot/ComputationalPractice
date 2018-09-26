@@ -5,7 +5,6 @@ eps = 1e-16
 
 def gaussFunc(a):
 
-    c = numpy.array(a)
     a = numpy.array(a)
 
     len1 = len(a[:, 0])
@@ -13,7 +12,7 @@ def gaussFunc(a):
     vectB = copy.deepcopy(a[:, len1])
 
     for i in range(len1):
-        #leadEl(a, i, len1)   #Chooses leading element in columns and swap lines
+        leadEl(a, i, len1)   #Chooses leading element in columns and swap lines
 
         alead = float(a[i][i])
 
@@ -23,11 +22,9 @@ def gaussFunc(a):
             z += 1
 
         j = i + 1
-
         while j < len1:
             b = a[j][i]
             z = i
-
             while z < len2:
                 a[j][z] = a[j][z] - a[i][z] * b
                 z += 1
@@ -35,8 +32,8 @@ def gaussFunc(a):
 
     a = backTrace(a)
 
-    print("b - Ax:")
-    print(vectorN(c, a, len1, vectB))
+    #print("b - Ax:")
+    #print(vectorN(c, a, len1, vectB))
 
     return a
 
@@ -50,7 +47,7 @@ def leadEl(a, i, len):
             mi = t1
         t1 += 1
     if abs(max) < eps:
-        raise DetermExeption("Check matrix")  # det(A) = 0
+        raise DetermExeption("Check matrix or use ")
     swapLines(a, i, mi)
 
 def swapLines (a, i, j):
@@ -85,16 +82,11 @@ def vectorN(c, a, rank, vectB):  # c = A, a - answer
     c = numpy.array(c)
     a = numpy.array(a)
     vectB = numpy.array(vectB)
-
     b = numpy.zeros((rank))
-
     i = 0
-
-
     while i < rank:
         j = 0
         while j < rank:
-
             b[i] += c[i][j]*a[j]
             j += 1
         i = i+1
@@ -111,13 +103,11 @@ def invMat(a):
 
     len1 = len(a[:, 0])
 
-    E = numpy.array([[1, 0, 0],
-                     [0, 1, 0],
-                     [0, 0, 1]])
+    E = numpy.eye(len1)
     a = numpy.hstack((a, E))
     len2 = len(a[0, :])
     for i in range(len1):
-        leadEl(a, i, len1)   #Chooses leading element in columns and swaps lines
+        #leadEl(a, i, len1)   #Chooses leading element in columns and swaps lines
 
         alead = float(a[i][i])
 
@@ -135,41 +125,38 @@ def invMat(a):
                 a[j][z] = a[j][z] - a[i][z] * b
                 z += 1
             j += 1
+
     for i in range(1, len1):
-        j = i - 1
-        b = a[j][i]
-        while j >= 0:
-            z = i
-            while z < len2:
-                a[j][z] -= a[i][z] * b
-                z += 1
-            j -= 1
+        k = i
+        while k < len1:
+            j = i - 1
+            b = a[j][k]
+            while j >= 0:
+                z = k
+                while z < len2:
+                    a[j][z] -= a[k][z] * b
+                    z += 1
+                j -= 1
+            k+=1
     return a
 
-#a = numpy.array([[1., 2, 1, 1],
-#                [1, 3 , 1, 1],
-#                [0, 1, 1, 2]])
-#a = numpy.array([[1.239 ,  1.6239, -0.4239,  0.4239],
-#                [2.239,   1.239,  -1.5239,  1.5239],
-#                [0.239,   0.566,   1.566,   1.566]])
-a = numpy.array([[8.29381, 0.995516, -0.560617, 1],
-                [0.995516, 6.298198, 0.595772, 0],
-                [-0.560617, 0.595772, 4.997407, 0]])
-# a = numpy.array([[0.0000829381, 0.995516, -0.560617, 1],
+
+# a = numpy.array([[8.29381, 0.995516, -0.560617, 1],
 #                 [0.995516, 6.298198, 0.595772, 0],
 #                 [-0.560617, 0.595772, 4.997407, 0]])
-print("A|b:")
-print(a)
 
-
-d = invMat(a)
-print("\n")
-print("A^(-1):")
-for t in range(len(d[:, 0])):
-    print(d[t][len(d[0, :])-len(d[:, 0]):len(d[0, :])])
-print("\n")
-
-b = gaussFunc(a)
-print("\n")
-print("Answer:")
-print(b)
+# print("A|b:")
+# print(a)
+#
+#
+# d = invMat(a)
+# print("\n")
+# print("A^(-1):")
+# for t in range(len(d[:, 0])):
+#     print(d[t][len(d[0, :])-len(d[:, 0]):len(d[0, :])])
+# print("\n")
+#
+# b = gaussFunc(a)
+# print("\n")
+# print("Answer:")
+# print(b)
