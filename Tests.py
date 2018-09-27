@@ -34,8 +34,23 @@ print("3) ||x^(7)-x*|| <= ", est, "\n")
 
 xk = IterationMethodsLS.simpIter(xs, H, g, k)
 print("4) x^(7):", xk, "\n")
-print("||x^(7)-x*||: ", linalg.norm(xk - x, numpy.inf), "\n")
+print("||x^(7)-x*|| = ", linalg.norm(xk - x, numpy.inf), "\n")
 
 xj = IterationMethodsLS.simpIter(xs, H, g, k-1)
 est = IterationMethodsLS.apostEst(xk, xj, H)
 print("||x^(7)-x*|| <= ", est, "\n")
+
+L = IterationMethodsLS.Lusternik(H, xk, xj)
+print("Lusternik's refinement:")
+print(L)
+print("||L(x^(7))-x*|| = ", linalg.norm(L - x, numpy.inf), "\n")
+
+print("5) Seidel method:")
+S = IterationMethodsLS.Seidel(H, g, xs, k)
+print(S)
+print("||xS-x*|| = ", linalg.norm(S - x, numpy.inf), "\n")
+
+print("7) Relax method:")
+print(IterationMethodsLS.sor(H, g, xs, k))
+
+
