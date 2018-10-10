@@ -73,17 +73,21 @@ def sor(H, g, xs, k):
     for i in range(0, l):
         D[i][i] = H[i][i]
     sr = specRad(H)
-    q = 2. / (1 + (1 - sr**2) * 0.5)
-    xk = numpy.zeros((1, l))[0, :]
+    q = 1
+    #q = 2. / (1 + (1 - sr**2) * 0.5)
     def iterator(k):
+        xk = numpy.zeros((1, l))[0, :]
         if k == 0:
             return xs
         else:
             xj = iterator(k-1)
             for i in range(0, l):
-                s = 0
-                for j in range(0, i-1):
-                    s += H[i][j] * xj[j]
-                xk[i] = xj[i] + q * (g[i] - xj[i] + s)
+                s1 = 0
+                for j in range(0, i):
+                    s1 += (H[i][j] * xk[j])
+                s2 = 0
+                for j in range(i, l):
+                    s2 += (H[i][j] * xj[j])
+                xk[i] = xj[i] + q * (g[i] - xj[i] + s1 + s2)
             return xk
     return iterator(k)
