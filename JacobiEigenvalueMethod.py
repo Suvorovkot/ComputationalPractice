@@ -27,7 +27,7 @@ def Jacobi(a, eps):
 
     n = len(a)
     v = numpy.identity(n) * 1.0
-    for k in range(5):
+    for k in range(2):
         for i in range(n - 1):
             for j in range(i + 1, n):
                 current = a[i][j]

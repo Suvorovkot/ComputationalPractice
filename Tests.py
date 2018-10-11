@@ -22,7 +22,7 @@ class TestCompMethods(unittest.TestCase):
     tb = numpy.array([[1], [0], [0]])
 
 
-    def testIterMethods():
+    def testIterMethods(self):
         A = TestCompMethods.t1A
         b = TestCompMethods.tb
 
@@ -70,7 +70,7 @@ class TestCompMethods(unittest.TestCase):
         print("||xS-x*|| = ", linalg.norm(R - x, numpy.inf), "\n")
 
 
-    def testJacobi():
+    def testJacobi(self):
         A = TestCompMethods.t1A
         print("A:")
         print(A, '\n')
@@ -79,8 +79,8 @@ class TestCompMethods(unittest.TestCase):
         print("Eigenvalues:")
 
         print(eigvalJ, "\n")
-        print("||e-eJ*|| = ", linalg.norm(numpy.sort(eigvalJ) - numpy.sort(eigval), numpy.inf), "\n")
-        #print("||e-eJ*|| = ", eigvalJ - numpy.sort(eigval), "\n")
+        # print("||e - eJ|| = ", linalg.norm(numpy.sort(eigvalJ) - numpy.sort(eigval), numpy.inf), "\n")
+        print("|e - eJ| = ", numpy.sort(eigvalJ) - numpy.sort(eigval), "\n")
         print("Eigenvectors:")
         print(eigvecJ, "\n")
         L = numpy.identity(len(A))
@@ -91,5 +91,6 @@ class TestCompMethods(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # TestCompMethods.testIterMethods()
-     TestCompMethods.testJacobi()
+    self = TestCompMethods()
+    # TestCompMethods.testIterMethods(self)
+    TestCompMethods.testJacobi(self)
