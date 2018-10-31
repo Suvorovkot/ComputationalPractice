@@ -7,6 +7,7 @@ import unittest
 import GaussianMethod
 import IterationMethodsLS
 import JacobiEigenvalueMethod
+import VariousEigenValuesMethods
 
 class TestCompMethods(unittest.TestCase):
     t1A = numpy.array([[8.29381, 0.995516, -0.560617],
@@ -89,8 +90,33 @@ class TestCompMethods(unittest.TestCase):
         print("||R = AX - LX|| = ", linalg.norm(numpy.dot(A, eigvec) - numpy.dot(L, eigvec), numpy.inf), "\n")
         #print("|R = AX - LX| = ", numpy.abs(numpy.dot(A, eigvec) - numpy.dot(L, eigvec)), "\n")
 
+    def testEigVal(self):
+        eps = 0.001
+        A = TestCompMethods.t1A
+        eigval, eigvec = linalg.eig(A)
+        print("A:")
+        print(A, '\n')
+        l1, x1, k = VariousEigenValuesMethods.powerMethod(A, eps)
+        print("Power method:")
+        print("lam1 = ", l1, " with eigenvector X = ", x1)
+        print("||R = AX - lam1*X|| = ", linalg.norm(numpy.dot(A, x1) - l1*x1, numpy.inf), "with", k, "iterations \n")
+        l1, x1, k = VariousEigenValuesMethods.scalProd(A, eps**2)
+        print("Scalar composition method:")
+        print("lam1 = ", l1, " with eigenvector X = ", x1)
+        print("||R = AX - lam1*X|| = ", linalg.norm(numpy.dot(A, x1) - l1 * x1, numpy.inf), "with", k, "iterations \n")
+
+        l, x = VariousEigenValuesMethods.specBound(A, eps, eigvec)
+        print("Opposite bound of spectral radius is: ", l, "with eigenvector", x, "\n")
+
+        l1, x1 = VariousEigenValuesMethods.Wielandt(A, eps)
+        print("Wielandts method:")
+        print("lam1 = ", l1, " with eigenvector X = ", x1)
+        print("||R = AX - lam1*X|| = ", linalg.norm(numpy.dot(A, x1) - l1 * x1, numpy.inf), "\n")
+
 
 if __name__ == '__main__':
     self = TestCompMethods()
     # TestCompMethods.testIterMethods(self)
-    TestCompMethods.testJacobi(self)
+    # TestCompMethods.testJacobi(self)
+    TestCompMethods.testEigVal(self)
+
