@@ -1,6 +1,7 @@
 import numpy
 import copy
 
+import scipy
 from scipy import linalg
 import unittest
 
@@ -8,6 +9,8 @@ import GaussianMethod
 import IterationMethodsLS
 import JacobiEigenvalueMethod
 import VariousEigenValuesMethods
+import Adams
+import DifferentialEquations2
 
 class TestCompMethods(unittest.TestCase):
     t1A = numpy.array([[8.29381, 0.995516, -0.560617],
@@ -18,9 +21,20 @@ class TestCompMethods(unittest.TestCase):
                      [3.0, 5.0, 1],
                      [2.0, 1.0, 7.0]])
 
+    t3A = numpy.array([[-125., 123.15],
+                       [123.15, -123.]])
 
+    t4A = numpy.array([[-125., 123.4],
+                       [123.4, -123.]])
 
-    tb = numpy.array([[1], [0], [0]])
+    t5A = numpy.array([[10.0, 2.0, 0., 0],
+                     [3.0, 10.0, 4, 0],
+                     [0.0, 1.0, 7.0, 5],
+                     [0.0, 0.0, 3.0, 4]])
+
+    tb1 = numpy.array([[1], [0], [0]])
+
+    tb2 = numpy.array([3., 4, 5, 6])
 
 
     def testIterMethods(self):
@@ -96,6 +110,9 @@ class TestCompMethods(unittest.TestCase):
         eigval, eigvec = linalg.eig(A)
         print("A:")
         print(A, '\n')
+        print("Python method:")
+        print("lam1 = ", max(eigval), "\n")
+
         l1, x1, k = VariousEigenValuesMethods.powerMethod(A, eps)
         print("Power method:")
         print("lam1 = ", l1, " with eigenvector X = ", x1)
@@ -113,10 +130,33 @@ class TestCompMethods(unittest.TestCase):
         print("lam1 = ", l1, " with eigenvector X = ", x1)
         print("||R = AX - lam1*X|| = ", linalg.norm(numpy.dot(A, x1) - l1 * x1, numpy.inf), "\n")
 
+    def testAdams(self):
+        A = TestCompMethods.t4A
+        # val, vec = linalg.eig(A)
+        # print("!!!", val)
+        h = 0.001
+        k = 4
+        y = numpy.array([1., 1.])
+        print("Euler method:")
+        for i in range(k):
+            print("Y", i, " = ", Adams.obvEuler(A, y, h, k)[i])
+        print("Interp Adams method:")
+        for i in range(2):
+            print("Y", i+1, " = ", Adams.Adams(A, y, h)[i])
+
+    def testTDMA(self):
+        A = TestCompMethods.t5A
+        F = TestCompMethods.tb2
+        print("Tridiagonal matrix method:")
+        print(DifferentialEquations2.triDiagonalMatrixSolver(A, F))
+        print("\n |Xm - X| = ", abs(DifferentialEquations2.triDiagonalMatrixSolver(A, F) - numpy.linalg.solve(A, F)))
+
 
 if __name__ == '__main__':
     self = TestCompMethods()
     # TestCompMethods.testIterMethods(self)
     # TestCompMethods.testJacobi(self)
-    TestCompMethods.testEigVal(self)
+    # TestCompMethods.testEigVal(self)
+    # TestCompMethods.testAdams(self)
+    TestCompMethods.testTDMA(self)
 
