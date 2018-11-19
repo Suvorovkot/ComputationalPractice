@@ -36,6 +36,7 @@ class TestCompMethods(unittest.TestCase):
 
     tb2 = numpy.array([3., 4, 5, 6])
 
+    tb3 = numpy.array([3., 4, 5])
 
     def testIterMethods(self):
         A = TestCompMethods.t1A
@@ -145,11 +146,13 @@ class TestCompMethods(unittest.TestCase):
             print("Y", i+1, " = ", Adams.Adams(A, y, h)[i])
 
     def testTDMA(self):
-        A = TestCompMethods.t5A
-        F = TestCompMethods.tb2
+        A = TestCompMethods.t2A
+        F = TestCompMethods.tb3
+        B = DifferentialEquations2.toTDM(A)
+        print(B)
         print("Tridiagonal matrix method:")
-        print(DifferentialEquations2.triDiagonalMatrixSolver(A, F))
-        print("\n |Xm - X| = ", abs(DifferentialEquations2.triDiagonalMatrixSolver(A, F) - numpy.linalg.solve(A, F)))
+        print(DifferentialEquations2.triDiagonalMatrixSolver(B, F))
+        print("\n |Xm - X| = ", abs(DifferentialEquations2.triDiagonalMatrixSolver(B, F) - numpy.linalg.solve(B, F)))
 
 
 if __name__ == '__main__':
@@ -159,4 +162,5 @@ if __name__ == '__main__':
     # TestCompMethods.testEigVal(self)
     # TestCompMethods.testAdams(self)
     TestCompMethods.testTDMA(self)
+    #TestCompMethods.testToTDMatrix(self)
 
